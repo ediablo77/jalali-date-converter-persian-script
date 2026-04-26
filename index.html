@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    
+    <title>تبدیل تاریخ شمسی به میلادی و قمری | محاسبه سن آنلاین</title>
+    <meta name="description" content="ابزار حرفه‌ای تبدیل تاریخ شمسی به میلادی، میلادی به شمسی و شمسی به قمری با قابلیت محاسبه سن دقیق">
+    <meta name="keywords" content="تبدیل تاریخ,تبدیل شمسی به میلادی,تبدیل میلادی به شمسی,تبدیل شمسی به قمری,محاسبه سن">
+    <meta name="author" content="Adsio.ir">
+    <meta name="robots" content="index, follow">
+    <link href="./bootstrap.min.css" rel="stylesheet">
+        <style>
+@font-face {
+    font-family: 'Vazir';
+    src: url('fonts/webfonts/Vazirmatn[wght].woff2') format('woff2-variations'),
+         url('fonts/webfonts/Vazirmatn[wght].woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazir', 'Segoe UI', 'Tahoma', system-ui, sans-serif;
+            background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+            transition: background 0.3s ease;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 2rem;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .card-header {
+            background: transparent;
+            border-bottom: 2px solid #eef2f8;
+            padding: 1.5rem 1.8rem 1rem;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #1e2f4e;
+        }
+        
+        .current-date-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gregorian-date {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .shamsi-date {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .converter-box {
+            background: #f8fafd;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: background 0.3s ease;
+        }
+        
+        .converter-box h5 {
+            color: #1e2f4e;
+            transition: color 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .form-select {
+            background-position: left 0.75rem center !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+            padding-left: 2rem !important;
+            padding-right: 0.75rem !important;
+            text-align: right;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 1rem !important;
+            border: 1px solid #e2e8f0 !important;
+            padding: 0.6rem 0.75rem 0.6rem 2rem !important;
+            font-family: 'Vazir', monospace;
+        }
+        
+        .btn-convert {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 1rem;
+            padding: 0.7rem;
+            color: white;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .btn-convert:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.3);
+        }
+        
+        .age-result {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        
+        .age-number {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        #darkModeToggle {
+            background: transparent;
+            border: 1px solid #cbd5e0;
+            border-radius: 2rem;
+            padding: 0.3rem 1rem;
+            transition: all 0.3s ease;
+            color: #1e2f4e;
+            cursor: pointer;
+        }
+        
+        #darkModeToggle:hover {
+            background: rgba(0,0,0,0.05);
+            transform: scale(1.05);
+        }
+        
+        .result-text {
+            font-weight: 500;
+            color: #667eea;
+            transition: color 0.3s ease;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        /* دارک مود */
+        body.dark-mode {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        body.dark-mode .card {
+            background: rgba(30, 30, 46, 0.95);
+        }
+        
+        body.dark-mode .card-header {
+            color: #e0e0e0;
+            border-bottom-color: #2d2d44;
+        }
+        
+        body.dark-mode .converter-box {
+            background: #2d2d44;
+        }
+        
+        body.dark-mode .converter-box h5 {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .form-control,
+        body.dark-mode .form-select {
+            background: #1e1e2e;
+            border-color: #3d3d5c !important;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+       background-repeat:no-repeat;
+	   background-size:16px 12px;
+	   }
+        
+        body.dark-mode .form-control:focus,
+        body.dark-mode .form-select:focus {
+            border-color: #667eea !important;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+        }
+        
+        body.dark-mode .result-text {
+            color: #a0a0c0;
+        }
+        
+        body.dark-mode .form-label {
+            color: #c4c4d4;
+        }
+        
+        body.dark-mode #darkModeToggle {
+            border-color: #667eea;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode #darkModeToggle:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .shamsi-date {
+                font-size: 1.3rem;
+            }
+            .age-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-12">
+		                <h1 class="visually-hidden">تبدیل آنلاین تاریخ شمسی ، میلادی ، قمری</h1>
+
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>📅 تبدیل تاریخ و محاسبه سن</span>
+                    <button id="darkModeToggle" class="btn btn-sm">
+                        🌙 دارک مود
+                    </button>
+                </div>
+                <div class="card-body p-4">
+                    
+                    <!-- نمایش تاریخ امروز -->
+                    <div class="current-date-card">
+                        <div class="gregorian-date" id="gregorianDate"></div>
+                        <div class="shamsi-date" id="shamsiDate"></div>
+                        <div class="mt-2">
+                            🕒 امروز
+                        </div>
+                    </div>
+                    
+                    <!-- تبدیل شمسی به میلادی -->
+                    <div class="converter-box">
+                        <h5>🔄 تبدیل شمسی به میلادی</h5>
+                        <div class="row g-3">
+                            <div class="col-4">
+                                <select id="shamsiYear" class="form-select"></select>
+                            </div>
+                            <div class="col-4">
+                                <select id="shamsiMonth" class="form-select"></select>
+                            </div>
+                            <div class="col-4">
+                                <select id="shamsiDay" class="form-select"></select>
+                            </div>
+                        </div>
+                        <button class="btn-convert w-100 mt-3" onclick="convertShamsiToGregorian()">
+                            🔄 تبدیل به میلادی
+                        </button>
+                        <div id="gregorianResult" class="result-text"></div>
+                    </div>
+                    
+                    <!-- تبدیل میلادی به شمسی -->
+                    <div class="converter-box">
+                        <h5>🔄 تبدیل میلادی به شمسی</h5>
+                        <div class="row g-3">
+                            <div class="col-4">
+                                <select id="gregorianYear" class="form-select"></select>
+                            </div>
+                            <div class="col-4">
+                                <select id="gregorianMonth" class="form-select"></select>
+                            </div>
+                            <div class="col-4">
+                                <select id="gregorianDay" class="form-select"></select>
+                            </div>
+                        </div>
+                        <button class="btn-convert w-100 mt-3" onclick="convertGregorianToShamsi()">
+                            🔄 تبدیل به شمسی
+                        </button>
+                        <div id="shamsiResult" class="result-text"></div>
+                    </div>
+                    
+                    <!-- تبدیل شمسی به قمری (جدید) -->
+                    <div class="converter-box">
+                        <h5>🔄 تبدیل شمسی به قمری (هجری قمری)</h5>
+                        <div class="row g-3">
+                            <div class="col-4">
+                                <select id="shamsiToHijriYear" class="form-select"></select>
+                            </div>
+                            <div class="col-4">
+                                <select id="shamsiToHijriMonth" class="form-select"></select>
+                            </div>
+                            <div class="col-4">
+                                <select id="shamsiToHijriDay" class="form-select"></select>
+                            </div>
+                        </div>
+                        <button class="btn-convert w-100 mt-3" onclick="convertShamsiToHijri()">
+                            🔄 تبدیل به قمری
+                        </button>
+                        <div id="hijriResult" class="result-text"></div>
+                    </div>
+                    
+                    <!-- محاسبه سن -->
+                    <div class="converter-box">
+                        <h5>🎂 محاسبه سن از روی تاریخ تولد</h5>
+                        <div class="mb-3">
+                            <label class="form-label">تاریخ تولد (شمسی)</label>
+                            <div class="row g-3">
+                                <div class="col-4">
+                                    <select id="birthYear" class="form-select"></select>
+                                </div>
+                                <div class="col-4">
+                                    <select id="birthMonth" class="form-select"></select>
+                                </div>
+                                <div class="col-4">
+                                    <select id="birthDay" class="form-select"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-convert w-100" onclick="calculateAge()">
+                            🧮 محاسبه سن
+                        </button>
+                        <div class="age-result mt-3" id="ageResult" style="display: none;">
+                            <div class="age-number" id="ageYears">0</div>
+                            <div>سال سن دارید</div>
+                            <div class="mt-2" id="ageDetails"></div>
+                        </div>
+						
+                    </div>
+                    
+                </div>
+				<div class="text-center pt-3 mt-2" style="border-top: 1px dashed #dee6ef; color: #6c7e97; transition: all 0.3s ease;" id="footerSection">
+    <div> ابزار تبدیل آنلاین تاریخ شمسی، میلادی و قمری</div>
+    <div class="mt-2">
+ تمامی حقوق محفوظ است | ساخته شده با ❤️ توسط
+ <a href="https://ez7.ir" style="color: inherit; text-decoration: none; font-weight: 500;">ایزی سون</a>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./jalali-moment.browser.js"></script>
+<script src="./script.js">
+</script>
+</body>
+</html>
