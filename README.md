@@ -1,2 +1,33 @@
-# jalali-date-converter-persian-script
-Single Page Jalali date Converter 
+# 📅 ابزار تبدیل تاریخ شمسی، میلادی و قمری
+
+یک ابزار آنلاین، رایگان و حرفه‌ای برای تبدیل انواع تقویم و محاسبه سن
+
+## ✨ امکانات
+
+- 📅 **نمایش تاریخ امروز** - نمایش همزمان تاریخ شمسی و میلادی
+- 🔄 **تبدیل شمسی به میلادی** - تبدیل دقیق تاریخ شمسی به میلادی با نمایش روز هفته
+- 🔄 **تبدیل میلادی به شمسی** - تبدیل دقیق تاریخ میلادی به شمسی با نمایش روز هفته
+- 🕌 **تبدیل شمسی به قمری** - تبدیل تاریخ شمسی به هجری قمری با نام ماه‌ها
+- 🎂 **محاسبه سن** - محاسبه دقیق سن بر اساس تاریخ تولد شمسی (سال، ماه و روز)
+- 🌙 **دارک مود** - قابلیت تغییر تم روشن/تاریک با ذخیره خودکار
+- 📱 **طراحی ریسپانسیو** - سازگار با تمام دستگاه‌ها (موبایل، تبلت، دسکتاپ)
+
+## 🛠️ تکنولوژی‌ها
+
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap 5
+- Jalali-Moment (کتابخانه تاریخ شمسی)
+
+## 🚀 دموی آنلاین
+
+[مشاهده دموی زنده](https://adsio.ir/date)
+[سازنده ایزی سون](https://ez7.ir/)
+
+
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+![RTL](https://img.shields.io/badge/RTL-Supported-orange)
